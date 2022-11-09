@@ -1,0 +1,188 @@
+.container {
+  margin: 20px auto;
+  font-family: "Open Sans", sans-serif;
+}
+
+.weather-app-left-bar {
+  background: rgb(255, 255, 255);
+}
+
+.weather-app-left-bar .search-area {
+  margin: 15px 2px;
+}
+
+.current-location {
+  border: none;
+  color: #65B1A7;
+  margin: 15px 2px;
+  padding: 6px 3px;
+  font-size: 16px;
+}
+
+.current-location:hover {
+  color: #FF6884;
+  opacity: 70%;
+  border-radius: 30%;
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: #487d76;
+  box-shadow: 0 0 10px #487d76;
+}
+
+.search-button {
+  color: #65b1a7;
+  border: 1px solid #65b1a7;
+}
+
+.search-button:hover {
+  background-color: #65b1a7;
+}
+
+.img-1 {
+  width: 150px;
+  display: block;
+  margin: 0 auto;
+  padding: 15px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.current-temp {
+  font-size: 48px;
+  font-family: "Lato", sans-serif;
+}
+
+.celsius-button-current,
+.fahrenheit-button-current,
+.celsius-fahrenheit-dash {
+  position: relative;
+  bottom: 20px;
+  background-color: white;
+  border-style: none;
+  padding: 1px;
+  font-size: 16px;
+  opacity: 80%;
+}
+
+.celsius-button-current:active,
+.fahrenheit-button-current:active {
+  opacity: 100%;
+}
+
+.celsius-button-current:focus,
+.fahrenheit-button-current:focus {
+  opacity: 100%;
+  color: #65b1a7;
+}
+
+.current-date-time {
+  font-size: 20px;
+  margin-top: 10px;
+  font-family: "Lato", sans-serif;
+}
+
+.current-state,
+.current-rain-chance,
+.current-city {
+  font-size: 18px;
+}
+
+.weather-app-right-bar {
+  background: #f4f3f3;
+}
+
+.weather-app-right-bar .month-week-c-f {
+  margin: 0 auto;
+  margin-top: 15px;
+  font-size: 20px;
+  color: black;
+  opacity: 70%;
+  font-family: "Montserrat", sans-serif;
+}
+
+.weather-app-right-bar .sun-mon-tue-wed-thu-fri-sat {
+  margin: 0 auto;
+  font-size: 12px;
+}
+
+.weather-app-right-bar .sun-mon-tue-wed-thu-fri-sat .card-daily {
+  border: none;
+  background-color: white;
+  color: black;
+}
+
+.weather-app-right-bar .sun-mon-tue-wed-thu-fri-sat .card-daily:hover {
+  background-color: #65b1a7;
+}
+
+.card-daily .day {
+  font-size: 20px;
+}
+
+.celsius-button,
+.fahrenheit-button {
+  background-color: #f4f3f3;
+  border-color: #f4f3f3;
+  border-radius: 50%;
+  border-style: none;
+  padding: 5px 10px;
+}
+
+.celsius-button:active,
+.fahrenheit-button:active {
+  background-color: black;
+  color: white;
+}
+
+.month-button,
+.week-button {
+  background-color: #f4f3f3;
+  border-color: #f4f3f3;
+  padding: 5px 10px;
+  border-style: none;
+}
+
+.month-button:active,
+.week-button:active {
+  font-weight: 700;
+  text-decoration: underline;
+  padding: 5px 10px;
+}
+
+.weather-app-right-bar .highlights {
+  margin-top: 0px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.weather-app-right-bar .today-highlights {
+  border: none;
+  margin-top: 0px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+}
+
+.hightlight-metrics {
+  opacity: 70%;
+}
+
+.weather-app-right-bar .today-highlights:hover {
+  background-color: #ff6884;
+}
+
+.coder {
+  text-align: center;
+  margin: 15px 0;
+  opacity: 70%;
+  font-size: 14px;
+}
+
+.coder-link {
+  text-decoration: none;
+  color: black;
+}

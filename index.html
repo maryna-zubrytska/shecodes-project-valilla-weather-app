@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script
+      src="https://kit.fontawesome.com/95dedc981a.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="src/style.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+
+    <title>Weather App</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row border rounded weather-app">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-4 weather-app-left-bar">
+
+              <div class="row">
+                <div class="col-1">
+                  <button type="button" class="btn current-location" id="current-location">
+                    <span class="material-symbols-outlined">
+                      my_location
+                      </span>
+                  </button>
+                </div>
+                <div class="col">
+                  <div class="search-area">
+                    <form class="d-flex" role="search" id="search-form">
+                      <input
+                        class="form-control me-2 search-bar"
+                        type="search"
+                        placeholder="Type in your city..."
+                        aria-label="Search"
+                        id="search-input"
+                      />
+                      <button
+                        class="btn search-button"
+                        type="submit"
+                        id="search-submit"
+                      >
+                        Search
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+
+              <div>
+                <img class="img-1" src="images/img-1.svg" alt="Sunny Day" />
+              </div>
+              <div class="current-temp">
+                <span id="current-temperature"></span>
+                <span class="celsius-fahrenheit-current">
+                  <button
+                    type="button"
+                    class="celsius-button-current"
+                    id="celsius-button-current"
+                  >
+                    °C
+                  </button>
+                  <span class="celsius-fahrenheit-dash"> / </span>
+                  <button
+                    type="button"
+                    class="fahrenheit-button-current"
+                    id="fahrenheit-button-current"
+                  >
+                    °F
+                  </button>
+                </span>
+              </div>
+              <div class="current-date-time" id="current-date-time">
+                Current Date & Time
+              </div>
+              <hr />
+              <div class="current-state" id="current-short-description"></div>
+              <div class="current-city" id="current-city">
+                🧭 <span id="default-city">Vinnytsia</span>, UA
+              </div>
+            </div>
+
+            <div class="col-8 weather-app-right-bar">
+              <div class="row month-week-c-f">
+                <div class="col-2">
+                  <button type="button" class="month-button">Month</button>
+                </div>
+                <div class="col-2">
+                  <button type="button" class="week-button">Week</button>
+                </div>
+                <div class="col-6"></div>
+                <div class="col-1">
+                  <button type="button" class="celsius-button">°C</button>
+                </div>
+                <div class="col-1">
+                  <button type="button" class="fahrenheit-button">°F</button>
+                </div>
+              </div>
+              <br />
+
+              <div class="row sun-mon-tue-wed-thu-fri-sat text-center">
+                <div class="col">
+                  <div class="card card-daily">
+                    <div class="card-body">
+                      <span>Sun</span>
+                      <br />
+                      <span class="day">☀️</span>
+                      <br />
+                      15° / -3°
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card card-daily">
+                    <div class="card-body">
+                      Mon
+                      <br />
+                      <span class="day">☀️</span>
+                      <br />
+                      15° / -3°
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card card-daily">
+                    <div class="card-body">
+                      Tue
+                      <br />
+                      <span class="day">☀️</span>
+                      <br />
+                      15° / -3°
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card card-daily">
+                    <div class="card-body">
+                      Wed
+                      <br />
+                      <span class="day">☀️</span>
+                      <br />
+                      15° / -3°
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card card-daily">
+                    <div class="card-body">
+                      Tru
+                      <br />
+                      <span class="day">☀️</span>
+                      <br />
+                      15° / -3°
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card card-daily">
+                    <div class="card-body">
+                      Fri
+                      <br />
+                      <span class="day">☀️</span>
+                      <br />
+                      15° / -3°
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card card-daily">
+                    <div class="card-body">
+                      Sat
+                      <br />
+                      <span class="day">☀️</span>
+                      <br />
+                      15° / -3°
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <br />
+
+              <div class="row highlights">
+                <div class="col-12">
+                  <strong> Today's highlights </strong>
+                </div>
+              </div>
+              <br />
+
+              <div class="row uv-wind-sunrize">
+                <div class="col">
+                  <div class="card today-highlights">
+                    <div class="card-body">
+                      <span class="hightlight-metrics">Cloudiness</span>
+                      <br />
+                      <br />
+                      <span id="highlight-cloudiness">%</span>
+                      <br />
+                      <br />
+                      <br />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="card today-highlights">
+                    <div class="card-body">
+                      <span class="hightlight-metrics">Wind Speed</span>
+                      <br />
+                      <br />
+                      <span id="highlight-wind-speed">m/s</span>
+                      <br />
+                      <span id="highlight-wind-assess">🍃</span>
+                      <br />
+                      <br />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="card today-highlights">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col">
+                          <span class="hightlight-metrics"
+                            >Sunrise & Sunset</span
+                          >
+                        </div>
+                      </div>
+                      <br />
+
+                      <div class="row">
+                        <div class="col-2">
+                          🌄
+                        </div>
+                        <div class="col">
+                          <span id="highlights-sunrise">AM</span> 
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-2">
+                          🌅
+                        </div>
+                        <div class="col">
+                          <span id="highlights-sunset">PM</span>                          
+                        </div>
+                      </div>
+                      <br />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+
+              <div class="row humidity-visibility-air">
+                <div class="col">
+                  <div class="card today-highlights">
+                    <div class="card-body">
+                      <span class="hightlight-metrics">Humidity</span>
+                      <br />
+                      <br />
+                      <span id="highlights-humidity-percent">%</span>
+                      <br />
+                      <span id="highlights-humidity-assess">Normal 👍🏻</span>
+                    </div>
+                    <br />
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card today-highlights">
+                    <div class="card-body">
+                      <span class="hightlight-metrics">Visibility</span>
+                      <br />
+                      <br />
+                      <span id="highlishgts-visibility">km</span>
+                      <br />
+                      <span id="highlights-visibility-assess">Average 😐</span>                      
+                    </div>
+                    <br />
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card today-highlights">
+                    <div class="card-body">
+                      <span class="hightlight-metrics">Temperature</span>
+                      <br />
+                      <br />
+                      <span id="highlights-max-temp">°C</span>
+                      <br />
+                      <span id="highlights-min-temp">°C</span>
+                    </div>
+                    <br />
+                  </div>
+                </div>
+              </div>
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="coder">
+        Created by
+        <a
+          class="coder-link"
+          href="https://www.linkedin.com/in/maryna-zubrytska-706078245"
+          target="_blank"
+          >Maryna Zubrytska</a
+        >
+      </div>
+    </div>
+
+    <script src="src/index.js"></script>
+  </body>
+</html>
