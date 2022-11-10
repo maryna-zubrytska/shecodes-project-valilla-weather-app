@@ -29,9 +29,6 @@ let currentDateTimeElement = document.querySelector("#current-date-time");
 let currentDateTime = new Date();
 currentDateTimeElement.innerHTML = showDateTime(currentDateTime);
 
-
-
-
 // variables and functions for showing temperature (Default, SearchCity, MyLocation)
 let cityElement = document.querySelector("#current-city");
 let tempElement = document.querySelector("#current-temperature");
@@ -103,11 +100,8 @@ function checkWind(response) {
   }
 }
 
-
-// variables and functions for showing Default temperature
-function showTempDefault(response) {
-  let temp = Math.round(response.data.main.temp);
-  tempElement.innerHTML = temp;
+function displayWeather(response) {
+  tempElement.innerHTML = Math.round(response.data.main.temp);
 
   cityElement.innerHTML = `🧭 ${response.data.name}, ${response.data.sys.country}`;
   descriptionElement.innerHTML = `
@@ -126,71 +120,30 @@ function showTempDefault(response) {
   minTempHighlightElement.innerHTML = `❄️ ${response.data.main.temp_min}°C`;
 }
 
-let apiCityDefault = document.querySelector("#default-city").innerHTML;
-
-// variables and functions for showing Default temperature in Celsius
-let apiURLDefaultC = `https://api.openweathermap.org/data/2.5/weather?q=${apiCityDefault}&units=${apiUnitsC}&appid=${apiKey}`;
-axios.get(apiURLDefaultC).then(showTempDefault);
-
-// variables and functions for displaying Search City and temperature for Search City
-let userSearchInput = document.querySelector("#search-input");
-function showTempSearch(response) {
-  let temp = Math.round(response.data.main.temp);
-  tempElement.innerHTML = temp;
-
-  cityElement.innerHTML = `🧭 ${response.data.name}, ${response.data.sys.country}`;
-  descriptionElement.innerHTML = `
-  <img src="http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png" alt="weather-icon" height="27">
-  ${response.data.weather[0].main}`;
-
-  cloudinessHightlightElement.innerHTML = `☁️ ${response.data.clouds.all}%`;
-  windStatusHighlightElement.innerHTML = `${response.data.wind.speed} m/s`;
-  checkWind(response);
-  sunriseHighlightElement.innerHTML = convertUnixToTime(response.data.sys.sunrise);
-  sunsetHighlightElement.innerHTML = convertUnixToTime(response.data.sys.sunset);
-  humidityPercentHighlightElement.innerHTML = `${response.data.main.humidity}%`;
-  checkHumidity(response);
-  visibilityHighlightElement.innerHTML = `${response.data.visibility / 1000} km`;
-  checkVisibility(response);
-  maxTempHightlightElement.innerHTML = `🌡️ ${response.data.main.temp_max}°C`;
-  minTempHighlightElement.innerHTML = `❄️ ${response.data.main.temp_min}°C`;
+function searchWeatherCity(city) {
+  let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${apiUnitsC}&appid=${apiKey}`;
+  axios.get(apiURL).then(displayWeather);
 }
-function searchCityTemp(event) {
-  event.preventDefault();
 
-  let apiUrlInput = `https://api.openweathermap.org/data/2.5/weather?q=${userSearchInput.value}&units=${apiUnitsC}&appid=${apiKey}`;
-  axios.get(apiUrlInput).then(showTempSearch); 
+// searching weather for a Default city
+searchWeatherCity("Vinnytsia");
+
+// searching weather for a Seatch vity
+function handleSearch(event) {
+  event.preventDefault();
+  let city = document.querySelector("#search-input").value;
+  searchWeatherCity(city);
 }
 let searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("submit", searchCityTemp);
+searchForm.addEventListener("submit", handleSearch);
 
-// variables and functions for displaying My Location City and temperature for My Location City
-function showTempLocation(response) {
-  let temp = Math.round(response.data.main.temp);
-  tempElement.innerHTML = temp;
-  cityElement.innerHTML = `🧭 ${response.data.name}, ${response.data.sys.country}`;
-  descriptionElement.innerHTML = `
-  <img src="http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png" alt="weather-icon" height="27">
-  ${response.data.weather[0].main}`;
-
-  cloudinessHightlightElement.innerHTML = `☁️ ${response.data.clouds.all}%`;
-  windStatusHighlightElement.innerHTML = `${response.data.wind.speed} m/s`;
-  checkWind(response);
-  sunriseHighlightElement.innerHTML = convertUnixToTime(response.data.sys.sunrise);
-  sunsetHighlightElement.innerHTML = convertUnixToTime(response.data.sys.sunset);
-  humidityPercentHighlightElement.innerHTML = `${response.data.main.humidity}%`;
-  checkHumidity(response);
-  visibilityHighlightElement.innerHTML = `${response.data.visibility / 1000} km`;
-  checkVisibility(response);
-  maxTempHightlightElement.innerHTML = `🌡️ ${response.data.main.temp_max}°C`;
-  minTempHighlightElement.innerHTML = `❄️ ${response.data.main.temp_min}°C`;
-}
+// searching weather for a Location city
 function getLocationSuccess (position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
   let apiUrlLocation = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${apiUnitsC}&appid=${apiKey}`;
   
-  axios.get(apiUrlLocation).then(showTempLocation);
+  axios.get(apiUrlLocation).then(displayWeather);
 }
 function getLocation(event) {
   event.preventDefault();
@@ -198,5 +151,3 @@ function getLocation(event) {
 }
 let myLocationElement = document.querySelector("#current-location");
 myLocationElement.addEventListener("click", getLocation);
-
-
