@@ -41,7 +41,7 @@
 
               <div class="row">
                 <div class="col-1">
-                  <button type="button" class="btn current-location" id="current-location">
+                  <button type="button" class="btn current-location-button" id="current-location-button">
                     <span class="material-symbols-outlined">
                       my_location
                       </span>
@@ -73,57 +73,53 @@
               <div>
                 <img class="img-1" src="images/img-1.svg" alt="Sunny Day" />
               </div>
-              <div class="current-temp">
+              <div class="left-bar-current-temp-area">
                 <span id="current-temperature"></span>
-                <span class="celsius-fahrenheit-current">
+                <span class="left-bar-current-temp-units-area">
                   <button
                     type="button"
-                    class="celsius-button-current"
-                    id="celsius-button-current"
+                    class="left-bar-units-celsius-button"
+                    id="left-bar-units-celsius-button"
                   >
                     °C
                   </button>
-                  <span class="celsius-fahrenheit-dash"> / </span>
+                  <span class="left-bar-units-dash"> / </span>
                   <button
                     type="button"
-                    class="fahrenheit-button-current"
-                    id="fahrenheit-button-current"
+                    class="left-bar-units-fahrenheit-button"
+                    id="left-bar-units-fahrenheit-button"
                   >
                     °F
                   </button>
                 </span>
               </div>
-              <div class="current-date-time" id="current-date-time">
-                Current Date & Time
-              </div>
+              <div class="left-bar-current-date-time" id="current-date-time"></div>
               <hr />
-              <div class="current-state" id="current-short-description"></div>
-              <div class="current-city" id="current-city">
-                🧭 <span id="default-city">Vinnytsia</span>, UA
-              </div>
+              <div class="left-bar-current-weather-desctiption" id="current-short-description"></div>
+              <div class="left-bar-current-city" id="current-city"></div>
             </div>
 
             <div class="col-8 weather-app-right-bar">
-              <div class="row month-week-c-f">
+              <div class="row right-bar-month-week-units">
                 <div class="col-2">
-                  <button type="button" class="month-button">Month</button>
+                  <button type="button" class="right-bar-month-button">Month</button>
                 </div>
                 <div class="col-2">
-                  <button type="button" class="week-button">Week</button>
+                  <button type="button" class="right-bar-week-button">Week</button>
                 </div>
                 <div class="col-6"></div>
                 <div class="col-1">
-                  <button type="button" class="celsius-button">°C</button>
+                  <button type="button" class="right-bar-celsius-button">°C</button>
                 </div>
                 <div class="col-1">
-                  <button type="button" class="fahrenheit-button">°F</button>
+                  <button type="button" class="right-bar-fahrenheit-button">°F</button>
                 </div>
               </div>
               <br />
 
-              <div class="row sun-mon-tue-wed-thu-fri-sat text-center">
+              <div class="row text-center right-bar-weather-weekly-cards">
                 <div class="col">
-                  <div class="card card-daily">
+                  <div class="card right-bar-weather-weekly-card">
                     <div class="card-body">
                       <span>Sun</span>
                       <br />
@@ -134,7 +130,7 @@
                   </div>
                 </div>
                 <div class="col">
-                  <div class="card card-daily">
+                  <div class="card right-bar-weather-weekly-card">
                     <div class="card-body">
                       Mon
                       <br />
@@ -145,7 +141,7 @@
                   </div>
                 </div>
                 <div class="col">
-                  <div class="card card-daily">
+                  <div class="card right-bar-weather-weekly-card">
                     <div class="card-body">
                       Tue
                       <br />
@@ -156,7 +152,7 @@
                   </div>
                 </div>
                 <div class="col">
-                  <div class="card card-daily">
+                  <div class="card right-bar-weather-weekly-card">
                     <div class="card-body">
                       Wed
                       <br />
@@ -167,7 +163,7 @@
                   </div>
                 </div>
                 <div class="col">
-                  <div class="card card-daily">
+                  <div class="card right-bar-weather-weekly-card">
                     <div class="card-body">
                       Tru
                       <br />
@@ -178,7 +174,7 @@
                   </div>
                 </div>
                 <div class="col">
-                  <div class="card card-daily">
+                  <div class="card right-bar-weather-weekly-card">
                     <div class="card-body">
                       Fri
                       <br />
@@ -189,7 +185,7 @@
                   </div>
                 </div>
                 <div class="col">
-                  <div class="card card-daily">
+                  <div class="card right-bar-weather-weekly-card">
                     <div class="card-body">
                       Sat
                       <br />
@@ -203,16 +199,16 @@
               <br />
               <br />
 
-              <div class="row highlights">
+              <div class="row right-bar-today-highlights">
                 <div class="col-12">
                   <strong> Today's highlights </strong>
                 </div>
               </div>
               <br />
 
-              <div class="row uv-wind-sunrize">
+              <div class="row right-bar-hightlights-row-1">
                 <div class="col">
-                  <div class="card today-highlights">
+                  <div class="card right-bar-today-highlights-card">
                     <div class="card-body">
                       <span class="hightlight-metrics">Cloudiness</span>
                       <br />
@@ -226,7 +222,7 @@
                 </div>
 
                 <div class="col">
-                  <div class="card today-highlights">
+                  <div class="card right-bar-today-highlights-card">
                     <div class="card-body">
                       <span class="hightlight-metrics">Wind Speed</span>
                       <br />
@@ -241,7 +237,7 @@
                 </div>
 
                 <div class="col">
-                  <div class="card today-highlights">
+                  <div class="card right-bar-today-highlights-card">
                     <div class="card-body">
                       <div class="row">
                         <div class="col">
@@ -275,35 +271,35 @@
               </div>
               <br />
 
-              <div class="row humidity-visibility-air">
+              <div class="row right-bar-hightlights-row-2">
                 <div class="col">
-                  <div class="card today-highlights">
+                  <div class="card right-bar-today-highlights-card">
                     <div class="card-body">
                       <span class="hightlight-metrics">Humidity</span>
                       <br />
                       <br />
                       <span id="highlights-humidity-percent">%</span>
                       <br />
-                      <span id="highlights-humidity-assess">Normal 👍🏻</span>
+                      <span id="highlights-humidity-assess"></span>
                     </div>
                     <br />
                   </div>
                 </div>
                 <div class="col">
-                  <div class="card today-highlights">
+                  <div class="card right-bar-today-highlights-card">
                     <div class="card-body">
                       <span class="hightlight-metrics">Visibility</span>
                       <br />
                       <br />
                       <span id="highlishgts-visibility">km</span>
                       <br />
-                      <span id="highlights-visibility-assess">Average 😐</span>                      
+                      <span id="highlights-visibility-assess"></span>                      
                     </div>
                     <br />
                   </div>
                 </div>
                 <div class="col">
-                  <div class="card today-highlights">
+                  <div class="card right-bar-today-highlights-card">
                     <div class="card-body">
                       <span class="hightlight-metrics">Temperature</span>
                       <br />
@@ -321,6 +317,8 @@
           </div>
         </div>
       </div>
+    </div>
+    <footer>
       <div class="coder">
         <a
         class="coder-link"
@@ -336,7 +334,7 @@
           >Maryna Zubrytska</a
         >
       </div>
-    </div>
+    </footer>
 
     <script src="src/index.js"></script>
   </body>
