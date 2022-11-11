@@ -72,7 +72,7 @@ function showDateTime(response) {
 function displayWeather(response) {
   document.querySelector("#current-temperature").innerHTML = Math.round(response.data.main.temp);
 
-  document.querySelector("#current-city").innerHTML = `🧭 ${response.data.name}, ${response.data.sys.country}`;
+  document.querySelector("#current-city").innerHTML = `🏠 ${response.data.name}, ${response.data.sys.country}`;
   document.querySelector("#current-short-description").innerHTML = `
   <img src="http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png" alt="weather-icon" height="27"> ${response.data.weather[0].main}`;
 
