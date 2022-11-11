@@ -79,7 +79,8 @@ function displayWeather(response) {
   
   let lat = response.data.coord.lat;
   let lon = response.data.coord.lon;
-  let apiUrlDateTime = `https://www.timeapi.io/api/Time/current/coordinate?${lat}=49.23075&${lon}=28.3990203`;
+  let apiUrlDateTime = `https://www.timeapi.io/api/Time/current/coordinate?latitude=${lat}&longitude=${lon}`;
+  console.log(apiUrlDateTime);
   axios.get(apiUrlDateTime).then(showDateTime);
 
   document.querySelector("#highlight-cloudiness").innerHTML = `☁️ ${response.data.clouds.all}%`;
