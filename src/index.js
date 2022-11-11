@@ -1,5 +1,12 @@
-// showing current date and time
-function showDateTime(date) {
+// global variables
+let apiKey = `54f39cdde746da7841439818e74d2199`;
+let apiUnitsC = `metric`;
+let apiUnitsF = `imperial`;
+
+// convert unixTimeStamp to regular time
+function formattedDateTime(timestamp) {
+  let date = new Date(timestamp);
+
   let daysWeek = [
     "Sunday",
     "Monday",
@@ -16,49 +23,23 @@ function showDateTime(date) {
   if (hours < 10) {
     hours = `0${hours}`;
   }
-
   let minutes = date.getMinutes();
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
-
-  return `${dayWeek}, ${hours}:${minutes}`;
-}
-
-let currentDateTimeElement = document.querySelector("#current-date-time");
-let currentDateTime = new Date();
-currentDateTimeElement.innerHTML = showDateTime(currentDateTime);
-
-// variables and functions for showing temperature (Default, SearchCity, MyLocation)
-let cityElement = document.querySelector("#current-city");
-let tempElement = document.querySelector("#current-temperature");
-let descriptionElement = document.querySelector("#current-short-description");
-
-let windStatusHighlightElement = document.querySelector("#highlight-wind-speed");
-let windAssessHighlightElement = document.querySelector("#highlight-wind-assess");
-let humidityPercentHighlightElement = document.querySelector("#highlights-humidity-percent");
-let humidityAssessHighlightElement = document.querySelector("#highlights-humidity-assess");
-let visibilityHighlightElement = document.querySelector("#highlishgts-visibility");
-let visibilityAssessHighlightElement = document.querySelector("#highlights-visibility-assess");
-let sunriseHighlightElement = document.querySelector("#highlights-sunrise");
-let sunsetHighlightElement = document.querySelector("#highlights-sunset");
-let cloudinessHightlightElement = document.querySelector("#highlight-cloudiness");
-let maxTempHightlightElement = document.querySelector("#highlights-max-temp");
-let minTempHighlightElement = document.querySelector("#highlights-min-temp");
-
-let apiKey = `54f39cdde746da7841439818e74d2199`;
-let apiUnitsC = `metric`;
-let apiUnitsF = `imperial`;
+  let formattedTime = `${dayWeek}, ${hours}:${minutes}`;
+  return formattedTime;
+ }
 
 // checking humidity 
 function checkHumidity(response) {
   if (response.data.main.humidity < 30) {
-    humidityAssessHighlightElement.innerHTML = `Dry 🤯`;
+    document.querySelector("#highlights-humidity-assess").innerHTML = `Dry 🤯`;
    } else {
     if (response.data.main.humidity > 60) {
-      humidityAssessHighlightElement.innerHTML = `Wet 😢`;
+      document.querySelector("#highlights-humidity-assess").innerHTML = `Wet 😢`;
     } else {
-      humidityAssessHighlightElement.innerHTML = `Normal 🙂`;
+      document.querySelector("#highlights-humidity-assess").innerHTML = `Normal 🙂`;
     }
    }
 }
@@ -66,58 +47,52 @@ function checkHumidity(response) {
 // checking visibility
 function checkVisibility(response) {
   if (response.data.visibility >= 10000) {
-    visibilityAssessHighlightElement.innerHTML = `Clear 🪄`;
+    document.querySelector("#highlights-visibility-assess").innerHTML = `Clear 🪄`;
   } else {
     if (response.data.visibility <= 5000) {
-      visibilityAssessHighlightElement.innerHTML = `Fog 🌫️`;
+      document.querySelector("#highlights-visibility-assess").innerHTML = `Fog 🌫️`;
     } else {
-      visibilityAssessHighlightElement.innerHTML = `Haze 🤔`;
+      document.querySelector("#highlights-visibility-assess").innerHTML = `Haze 🤔`;
     }
   }
 }
 
-// convert unixTimeStamp tp regular time
-function convertUnixToTime(response) {
-  let unixTimestamp = response;
-  let date = new Date(unixTimestamp * 1000);
-  let hours = date.getHours();
-  if (hours < 10) {
-    hours = `0${hours}`;
-  }
-  let minutes = date.getMinutes();
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
-  let formattedSunrise = `${hours}:${minutes}`;
-  return formattedSunrise;
- }
-
 function checkWind(response) {
   if (response.data.wind.speed > 17) {
-    windAssessHighlightElement.innerHTML = `🎈 Dangerous`;
+    document.querySelector("#highlight-wind-assess").innerHTML = `🎈 Dangerous`;
   } else {
-    windAssessHighlightElement.innerHTML = `🍃 Normal`;
+    document.querySelector("#highlight-wind-assess").innerHTML = `🍃 Normal`;
   }
 }
 
-function displayWeather(response) {
-  tempElement.innerHTML = Math.round(response.data.main.temp);
+function showDateTime(response) {
+ document.querySelector("#current-date-time").innerHTML = `${response.dayOfWeek}, ${response.hour}:${response.minute}`;
+}
 
-  cityElement.innerHTML = `🧭 ${response.data.name}, ${response.data.sys.country}`;
-  descriptionElement.innerHTML = `
+function displayWeather(response) {
+  document.querySelector("#current-temperature").innerHTML = Math.round(response.data.main.temp);
+
+  document.querySelector("#current-city").innerHTML = `🧭 ${response.data.name}, ${response.data.sys.country}`;
+  document.querySelector("#current-short-description").innerHTML = `
   <img src="http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png" alt="weather-icon" height="27"> ${response.data.weather[0].main}`;
 
-  cloudinessHightlightElement.innerHTML = `☁️ ${response.data.clouds.all}%`;
-  windStatusHighlightElement.innerHTML = `${response.data.wind.speed} m/s`;
+  
+  let lat = response.data.coord.lat;
+  let lon = response.data.coord.lon;
+  let apiUrlDateTime = `https://www.timeapi.io/api/Time/current/coordinate?${lat}=49.23075&${lon}=28.3990203`;
+  axios.get(apiUrlDateTime).then(showDateTime);
+
+  document.querySelector("#highlight-cloudiness").innerHTML = `☁️ ${response.data.clouds.all}%`;
+  document.querySelector("#highlight-wind-speed").innerHTML = `${response.data.wind.speed} m/s`;
   checkWind(response);
-  sunriseHighlightElement.innerHTML = convertUnixToTime(response.data.sys.sunrise);
-  sunsetHighlightElement.innerHTML = convertUnixToTime(response.data.sys.sunset);
-  humidityPercentHighlightElement.innerHTML = `${response.data.main.humidity}%`;
+  document.querySelector("#highlights-sunrise").innerHTML = formattedDateTime(response.data.sys.sunrise * 1000);
+  document.querySelector("#highlights-sunset").innerHTML = formattedDateTime(response.data.sys.sunset * 1000);
+  document.querySelector("#highlights-humidity-percent").innerHTML = `${response.data.main.humidity}%`;
   checkHumidity(response);
-  visibilityHighlightElement.innerHTML = `${response.data.visibility / 1000} km`;
+  document.querySelector("#highlishgts-visibility").innerHTML = `${response.data.visibility / 1000} km`;
   checkVisibility(response);
-  maxTempHightlightElement.innerHTML = `🌡️ ${response.data.main.temp_max}°C`;
-  minTempHighlightElement.innerHTML = `❄️ ${response.data.main.temp_min}°C`;
+  document.querySelector("#highlights-max-temp").innerHTML = `🌡️ ${Math.round(response.data.main.temp_max)}°C`;
+  document.querySelector("#highlights-min-temp").innerHTML = `❄️ ${Math.round(response.data.main.temp_min)}°C`;
 }
 
 function searchWeatherCity(city) {
@@ -128,7 +103,7 @@ function searchWeatherCity(city) {
 // searching weather for a Default city
 searchWeatherCity("Vinnytsia");
 
-// searching weather for a Seatch vity
+// searching weather for a Search vity
 function handleSearch(event) {
   event.preventDefault();
   let city = document.querySelector("#search-input").value;
@@ -151,3 +126,4 @@ function getLocation(event) {
 }
 let myLocationElement = document.querySelector("#current-location-button");
 myLocationElement.addEventListener("click", getLocation);
+
