@@ -72,6 +72,7 @@ document.querySelector("#current-date-time").innerHTML = `🧭 Local time <br> �
 }
 
 function displayWeather(response) {
+  currentTempCelsius = response.data.main.temp;
   document.querySelector("#current-temperature").innerHTML = Math.round(response.data.main.temp);
 
   document.querySelector("#current-city").innerHTML = `🏠 ${response.data.name}, ${response.data.sys.country}`;
@@ -94,6 +95,9 @@ function displayWeather(response) {
   checkHumidity(response);
   document.querySelector("#highlishgts-visibility").innerHTML = `${response.data.visibility / 1000} km`;
   checkVisibility(response);
+
+  maxTempCelsius = response.data.main.temp_max;
+  minTempCelsius = response.data.main.temp_min;
   document.querySelector("#highlights-max-temp").innerHTML = `🌡️ ${Math.round(response.data.main.temp_max)}°C`;
   document.querySelector("#highlights-min-temp").innerHTML = `❄️ ${Math.round(response.data.main.temp_min)}°C`;
 }
@@ -130,3 +134,31 @@ function getLocation(event) {
 let myLocationElement = document.querySelector("#current-location-button");
 myLocationElement.addEventListener("click", getLocation);
 
+let currentTempCelsius = null;
+let maxTempCelsius = null;
+let minTempCelsius = null;
+
+function convertToFahr(event) {
+  event.preventDefault();
+  let tempFahr = (currentTempCelsius * 9) / 5 + 32;
+  document.querySelector("#current-temperature").innerHTML = Math.round(tempFahr);
+
+  let maxTempFahr = Math.round((maxTempCelsius * 9) / 5 + 32);
+  document.querySelector("#highlights-max-temp").innerHTML = (`🌡️ ${maxTempFahr}°F`);
+
+  let minTempFahr = Math.round((minTempCelsius * 9) / 5 + 32);
+  document.querySelector("#highlights-min-temp").innerHTML = (`❄️ ${minTempFahr}°F`);
+}
+
+function convertBackToCel(event) {
+  event.preventDefault();
+  document.querySelector("#current-temperature").innerHTML = Math.round(currentTempCelsius);
+  document.querySelector("#highlights-max-temp").innerHTML = (`🌡️ ${Math.round(maxTempCelsius)}°C`);
+  document.querySelector("#highlights-min-temp").innerHTML = (`❄️ ${Math.round(minTempCelsius)}°C`);
+}
+
+let leftBarFahrenheitElement = document.querySelector("#left-bar-units-fahrenheit-button");
+leftBarFahrenheitElement.addEventListener("click", convertToFahr);
+
+let leftBarCelsiusElement = document.querySelector("#left-bar-units-celsius-button");
+leftBarCelsiusElement.addEventListener("click", convertBackToCel);
