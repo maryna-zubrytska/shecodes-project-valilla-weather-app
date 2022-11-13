@@ -3,32 +3,25 @@ let apiKey = `54f39cdde746da7841439818e74d2199`;
 let apiUnitsC = `metric`;
 let apiUnitsF = `imperial`;
 
-// convert unixTimeStamp to regular time
-function formattedDateTime(timestamp) {
-  let date = new Date(timestamp);
+ function displaySunriseSunsetLocal (response) {
+  let timezone = response.data.timezone;
+  let dateSunrise = new Date(response.data.current.sunrise * 1000);
+  let dateSunset = new Date(response.data.current.sunset * 1000);
 
-  let daysWeek = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
-  ];
-  let dayWeekIndex = date.getDay();
-  let dayWeek = daysWeek[dayWeekIndex];
+  let formattedDateSunrise = new Intl.DateTimeFormat("default", {
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: timezone,
+  }).format(dateSunrise); 
 
-  let hours = date.getHours();
-  if (hours < 10) {
-    hours = `0${hours}`;
-  }
-  let minutes = date.getMinutes();
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
-  let formattedTime = `${dayWeek}, ${hours}:${minutes}`;
-  return formattedTime;
+  let formattedDateSunset = new Intl.DateTimeFormat("default", {
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: timezone,
+  }).format(dateSunset); 
+
+  document.querySelector("#highlights-sunrise").innerHTML = `${formattedDateSunrise}`;
+  document.querySelector("#highlights-sunset").innerHTML = `${formattedDateSunset}`;
  }
 
 // checking humidity 
@@ -66,7 +59,16 @@ function checkWind(response) {
 }
 
 function showDateTime(response) {
- document.querySelector("#current-date-time").innerHTML = `${response.dayOfWeek}, ${response.hour}:${response.minute}`;
+let timezone = response.data.timezone;
+let date = new Date();
+ let formattedDate = new Intl.DateTimeFormat("default", {
+  weekday: "long",
+  hour: "numeric",
+  minute: "2-digit",
+  timeZone: timezone,
+}).format(date); 
+
+document.querySelector("#current-date-time").innerHTML = `🧭 Local time <br> ⏳ ${formattedDate}`;
 }
 
 function displayWeather(response) {
@@ -79,15 +81,15 @@ function displayWeather(response) {
   
   let lat = response.data.coord.lat;
   let lon = response.data.coord.lon;
-  let apiUrlDateTime = `https://www.timeapi.io/api/Time/current/coordinate?latitude=${lat}&longitude=${lon}`;
-  console.log(apiUrlDateTime);
+  let apiUrlDateTime= `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,daily&appid=6e6ec494746b5229a9f2d526478c924c`;
   axios.get(apiUrlDateTime).then(showDateTime);
 
   document.querySelector("#highlight-cloudiness").innerHTML = `☁️ ${response.data.clouds.all}%`;
   document.querySelector("#highlight-wind-speed").innerHTML = `${response.data.wind.speed} m/s`;
   checkWind(response);
-  document.querySelector("#highlights-sunrise").innerHTML = formattedDateTime(response.data.sys.sunrise * 1000);
-  document.querySelector("#highlights-sunset").innerHTML = formattedDateTime(response.data.sys.sunset * 1000);
+
+  axios.get(apiUrlDateTime).then(displaySunriseSunsetLocal);
+
   document.querySelector("#highlights-humidity-percent").innerHTML = `${response.data.main.humidity}%`;
   checkHumidity(response);
   document.querySelector("#highlishgts-visibility").innerHTML = `${response.data.visibility / 1000} km`;
