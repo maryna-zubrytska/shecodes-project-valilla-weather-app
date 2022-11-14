@@ -109,6 +109,7 @@
 .weather-app-right-bar .right-bar-weather-weekly-cards .right-bar-weather-weekly-card {
   border: none;
   background-color: white;
+  margin-bottom: 10px;
   color: black;
 }
 
@@ -129,25 +130,19 @@
   padding: 5px 10px;
 }
 
-.right-bar-celsius-button:active,
-.right-bar-fahrenheit-button:active {
-  background-color: black;
-  color: white;
+.right-bar-celsius-button:focus,
+.right-bar-fahrenheit-button:focus {
+  opacity: 100%;
+  color: #65b1a7;
 }
 
-.right-bar-month-button,
+
+
 .right-bar-week-button {
   background-color: #f4f3f3;
   border-color: #f4f3f3;
   padding: 5px 10px;
   border-style: none;
-}
-
-.right-bar-month-button:active,
-.right-bar-week-button:active {
-  font-weight: 700;
-  text-decoration: underline;
-  padding: 5px 10px;
 }
 
 .weather-app-right-bar .right-bar-today-highlights {

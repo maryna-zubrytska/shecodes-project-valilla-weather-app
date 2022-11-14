@@ -101,100 +101,20 @@
 
             <div class="col-8 weather-app-right-bar">
               <div class="row right-bar-month-week-units">
-                <div class="col-2">
-                  <button type="button" class="right-bar-month-button">Month</button>
-                </div>
-                <div class="col-2">
-                  <button type="button" class="right-bar-week-button">Week</button>
+                <div class="col-4">
+                  <button type="button" class="right-bar-week-button">Weather Forecast</button>
                 </div>
                 <div class="col-6"></div>
                 <div class="col-1">
-                  <button type="button" class="right-bar-celsius-button">°C</button>
+                  <button type="button" class="right-bar-celsius-button" id="right-bar-celsius-button">°C</button>
                 </div>
                 <div class="col-1">
-                  <button type="button" class="right-bar-fahrenheit-button">°F</button>
+                  <button type="button" class="right-bar-fahrenheit-button" id="right-bar-fahrenheit-button">°F</button>
                 </div>
               </div>
               <br />
 
-              <div class="row text-center right-bar-weather-weekly-cards">
-                <div class="col">
-                  <div class="card right-bar-weather-weekly-card">
-                    <div class="card-body">
-                      <span>Sun</span>
-                      <br />
-                      <span class="day">☀️</span>
-                      <br />
-                      15° / -3°
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card right-bar-weather-weekly-card">
-                    <div class="card-body">
-                      Mon
-                      <br />
-                      <span class="day">☀️</span>
-                      <br />
-                      15° / -3°
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card right-bar-weather-weekly-card">
-                    <div class="card-body">
-                      Tue
-                      <br />
-                      <span class="day">☀️</span>
-                      <br />
-                      15° / -3°
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card right-bar-weather-weekly-card">
-                    <div class="card-body">
-                      Wed
-                      <br />
-                      <span class="day">☀️</span>
-                      <br />
-                      15° / -3°
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card right-bar-weather-weekly-card">
-                    <div class="card-body">
-                      Tru
-                      <br />
-                      <span class="day">☀️</span>
-                      <br />
-                      15° / -3°
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card right-bar-weather-weekly-card">
-                    <div class="card-body">
-                      Fri
-                      <br />
-                      <span class="day">☀️</span>
-                      <br />
-                      15° / -3°
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card right-bar-weather-weekly-card">
-                    <div class="card-body">
-                      Sat
-                      <br />
-                      <span class="day">☀️</span>
-                      <br />
-                      15° / -3°
-                    </div>
-                  </div>
-                </div>
+              <div class="row text-center right-bar-weather-weekly-cards" id="forecast">
               </div>
               <br />
               <br />
@@ -301,12 +221,12 @@
                 <div class="col">
                   <div class="card right-bar-today-highlights-card">
                     <div class="card-body">
-                      <span class="hightlight-metrics">Temperature</span>
+                      <span class="hightlight-metrics">UV Index</span>
                       <br />
                       <br />
-                      <span id="highlights-max-temp"></span>
+                      <span id="uv-index"></span>
                       <br />
-                      <span id="highlights-min-temp"></span>
+                      <span id="uv-index-assess"></span>
                     </div>
                     <br />
                   </div>
