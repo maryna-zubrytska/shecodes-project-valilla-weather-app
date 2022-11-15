@@ -77,35 +77,24 @@ function showUV(response) {
   let uvIndex = response.data.current.uvi;
   document.querySelector("#uv-index").innerHTML = `🌻 ${uvIndex}`;
 
-  switch (uvIndex) {
-    case 0:
-    case 1:
-    case 2:
-      document.querySelector("#uv-index-assess").innerHTML = `🟢 Low`;
-      break;
-    case 3:
-    case 4:
-    case 5:
+  if (uvIndex <=2) {
+    document.querySelector("#uv-index-assess").innerHTML = `🟢 Low`;
+  } else {
+    if (uvIndex > 2 && uvIndex <= 5) {
       document.querySelector("#uv-index-assess").innerHTML = `😎 Moderate`;
-      break;
-    case 6:
-    case 7:
-      document.querySelector("#uv-index-assess").innerHTML = `🟠 High`;
-      break;
-    case 8:
-    case 9:
-    case 10:
-      document.querySelector("#uv-index-assess").innerHTML = `🎈 Very high`;
-      break;
-    case 11:
-      document.querySelector("#uv-index-assess").innerHTML = `🤯 Extreme`;
-      break;
+    } else {
+      if (uvIndex > 5 && uvIndex <=7) {
+        document.querySelector("#uv-index-assess").innerHTML = `🟠 High`;
+      } else {
+        if (uvIndex > 7 && uvIndex <= 10) {
+          document.querySelector("#uv-index-assess").innerHTML = `🎈 Very high`;
+        } else {
+          document.querySelector("#uv-index-assess").innerHTML = `🤯 Extreme`;
+        }
+      }
+    }
   }
-
-  if (uvIndex > 11) {
-    document.querySelector("#uv-index-assess").innerHTML = `🤯 Extreme`;
-  }
-  
+ 
 }
 
 function displayWeather(response) {
