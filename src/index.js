@@ -144,6 +144,11 @@ function displayWeather(response) {
 function searchWeatherCity(city) {
   let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${apiUnitsC}&appid=${apiKey}`;
   axios.get(apiURL).then(displayWeather);
+
+  axios.get(apiURL)
+  .catch (function (error) {
+    alert('The city has not been found. Please, try again');
+  });
 }
 
 // searching weather for a Default city
@@ -152,7 +157,7 @@ searchWeatherCity("Vinnytsia");
 // searching weather for a Search vity
 function handleSearch(event) {
   event.preventDefault();
-  let city = document.querySelector("#search-input").value;
+  let city = document.querySelector("#search-input").value.trim();
   searchWeatherCity(city);
 }
 let searchForm = document.querySelector("#search-form");
