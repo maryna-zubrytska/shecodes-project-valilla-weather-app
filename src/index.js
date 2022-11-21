@@ -201,7 +201,7 @@ function showForecast(response) {
 
   for (let i = 0; i < 6; i++) {
     forecastHTML = forecastHTML + `
-    <div class="col-2">
+    <div class="col-sm-2">
     <div class="card right-bar-weather-weekly-card">
     <div class="card-body">
       <span id="forecast-day">${showForecastDay(forecastArray[i].dt)}</span>

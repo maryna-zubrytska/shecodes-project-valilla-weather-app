@@ -5,6 +5,7 @@
 
 .weather-app-left-bar {
   background: rgb(255, 255, 255);
+  margin-bottom: 10px;
 }
 
 .weather-app-left-bar .search-area {
