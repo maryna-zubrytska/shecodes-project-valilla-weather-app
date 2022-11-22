@@ -186,3 +186,36 @@
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+@media (max-width: 800px) {
+  .weather-app-right-bar {
+    background: white;
+  }
+
+  .right-bar-celsius-button,
+  .right-bar-fahrenheit-button {
+  background-color: white;
+  border-color: white;
+}
+
+.right-bar-week-button {
+  background-color: white;
+  border-color: white;
+}
+
+.weather-app-right-bar .right-bar-weather-weekly-cards .right-bar-weather-weekly-card {
+  border: none;
+  background-color: #f4f3f3;
+}
+
+.weather-app-right-bar .right-bar-today-highlights-card {
+  border: none;
+  background-color: #f4f3f3;
+}
+}
+
+@media (min-width: 800px) {
+  .mobile-devices-only {
+    display: none;
+  }
+}
